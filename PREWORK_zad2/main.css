@@ -1,0 +1,11 @@
+h1 {
+  font-size: 100px;
+}
+
+.list li {
+  font-size: 30px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
