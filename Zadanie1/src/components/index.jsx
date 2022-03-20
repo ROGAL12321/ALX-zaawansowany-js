@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 
 import App from './App/App.jsx';
 
+import '../styles/main.css';
+
 // JS vs JSX
 // const value = 'Damian';
 

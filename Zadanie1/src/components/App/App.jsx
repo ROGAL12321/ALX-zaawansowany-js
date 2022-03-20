@@ -1,16 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoList from '../TodoList/TodoList.jsx';
 
-const todos = [
-  {
-    name: 'Wynieść śmieci',
-    checked: false,
-  },
-  {
-    name: 'Przyjść na zajęcia',
-    checked: true,
-  },
-];
+import styles from './App.module.css';
 
 // ES6 Destructurization
 
@@ -50,26 +41,57 @@ const todos = [
 
 const App = () => {
   const [inputValue, setInputValue] = useState('');
+  const [todos, setTodos] = useState([]);
+  const [isErrorMessage, setIsErrorMessage] = useState(false);
+
+  useEffect(() => {
+    // nullish operator ?? []
+    const todosFromLS = JSON.parse(localStorage.getItem('todos')) ?? [];
+    setTodos(todosFromLS);
+  }, []);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  // console.log(inputValue);
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // walidacja
     if (inputValue.length < 2) {
-      alert('blad');
+      setIsErrorMessage(true);
+      return;
     }
+
+    const newTodos = [
+      ...todos,
+      {
+        name: inputValue,
+        checked: false,
+      },
+    ];
+
+    setTodos(newTodos);
+    // todos bedzie jeszcze stare !!
+    localStorage.setItem('todos', JSON.stringify(newTodos));
+
+    // const newTodos = todos.concat({
+    //   name: inputValue,
+    //   checked: false,
+    // });
+
+    // setTodos(newTodos);
+
+    // czyszczenie formularza
+    setInputValue('');
   };
 
   return (<div>
   <h1>Todo list</h1>
   <form onSubmit={handleSubmit}>
-    <input type="text" placeholder="Write todo" onChange={handleInputChange}/>
+    <input type="text" placeholder="Write todo" value={inputValue} onChange={handleInputChange}/>
     <button type="submit">send todo</button>
+    {isErrorMessage ? <p className={styles.error}>Za malo znaków. Minimum 3</p> : null}
   </form>
   <TodoList todoList={todos}/>
 </div>);
