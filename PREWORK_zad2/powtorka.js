@@ -1,4 +1,4 @@
-console.log('Hello ALX')
+console.log('Hello ALX');
 
 // Zmienne
 
@@ -6,21 +6,21 @@ console.log('Hello ALX')
 
 // var ma zasieg leksykalny i mozna go nadpisac
 
-var name = 'Damian'; // String
-var age = 25; // Number
-var isAdult = age >= 18; // Boolean (true/false)
-var dogs = ['siunia', 'piunia']; // Object (Array)
-var person = {
+const name = 'Damian'; // String
+const age = 25; // Number
+const isAdult = age >= 18; // Boolean (true/false)
+const dogs = ['siunia', 'piunia']; // Object (Array)
+const person = {
   name: 'Krzysiek',
-  age: 40
-} // Object
-var cat = null;
-var car = undefined;
+  age: 40,
+}; // Object
+const cat = null;
+const car = undefined;
 
 // ES6+
 
 // let ma zasieg blokowy i mozna nadpisac
-let name2 = 'Damian';
+const name2 = 'Damian';
 const age2 = 35;
 
 // if (true) {
@@ -28,7 +28,6 @@ const age2 = 35;
 // }
 
 // console.log(someVariable)
-
 
 // const someVariable2 = 33;
 // someVariable2 = '33'; // error bo const jest stala
@@ -40,8 +39,6 @@ const age2 = 35;
 // candidates.push('Pawel');
 
 // console.log(candidates)
-
-
 
 // 2. Funkcje
 
@@ -76,8 +73,6 @@ const age2 = 35;
 
 // console.log(calculateBMI(weight, height))
 
-
-
 // 2 sposob wywolywania funkcji
 
 // function someFunction() {
@@ -94,16 +89,18 @@ const age2 = 35;
 // map
 // reduce
 // filter
+// find
 
 const shoes = [
   {
     company: 'nike',
-    price: 399
-  }, {
+    price: 399,
+  },
+  {
     company: 'adidas',
-    price: 199
-  }
-]
+    price: 199,
+  },
+];
 
 // forEach - przechodzenie przez elementy
 
@@ -147,15 +144,13 @@ const shoes = [
 //   }
 // ]
 
-let sum = 0
+let sum = 0;
 
 shoes.forEach((shoe) => {
-  sum = sum + shoe.price;
-})
+  sum += shoe.price;
+});
 
-const sum2 = shoes.reduce((currentSum, shoe) => {
-  return currentSum + shoe.price;
-}, 0)
+const sum2 = shoes.reduce((currentSum, shoe) => currentSum + shoe.price, 0);
 
 console.log(sum);
 console.log(sum2);
