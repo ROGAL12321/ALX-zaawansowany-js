@@ -3,7 +3,7 @@
 import React from 'react'; // JS Modules
 import ReactDOM from 'react-dom';
 
-import { App } from './App/App.jsx';
+import App from './App/App.jsx';
 
 // JS vs JSX
 // const value = 'Damian';
@@ -22,6 +22,6 @@ import { App } from './App/App.jsx';
 // const todoJSX = <li className="completed" style={{ padding: '20px' }}></li>;
 
 ReactDOM.render(
-  App,
+  <App />,
   document.querySelector('#app'),
 );
