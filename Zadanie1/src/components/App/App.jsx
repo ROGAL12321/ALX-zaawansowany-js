@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import TodoList from '../TodoList/TodoList.jsx';
 
 import styles from './App.module.css';
@@ -50,6 +52,11 @@ const App = () => {
     setTodos(todosFromLS);
   }, []);
 
+  const saveTodos = (todosToSave) => {
+    setTodos(todosToSave);
+    localStorage.setItem('todos', JSON.stringify(todosToSave));
+  };
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -66,14 +73,13 @@ const App = () => {
     const newTodos = [
       ...todos,
       {
+        id: uuidv4(),
         name: inputValue,
         checked: false,
       },
     ];
 
-    setTodos(newTodos);
-    // todos bedzie jeszcze stare !!
-    localStorage.setItem('todos', JSON.stringify(newTodos));
+    saveTodos(newTodos);
 
     // const newTodos = todos.concat({
     //   name: inputValue,
@@ -86,6 +92,29 @@ const App = () => {
     setInputValue('');
   };
 
+  // Wykonaj funkcje handleTaskFInished
+  // Funkcja powinna zmieniac wartosc klucz checked tylko dla elementu kliknietego
+  // podpowiedz : funkcja findIndex
+  // Nowa tablica (po tej zmianie) zapisz za pomoca funkcji setTodos
+
+  const handleTaskFinished = (id) => {
+    const indexOfChangedElement = todos.findIndex((todo) => todo.id === id);
+    // sprytne uzycie spread operator zeby zrobic kopie tablicy
+    const changedTodos = [...todos];
+    // aktualnie klikniety obiekt
+    // console.log(todos[indexOfChangedElement]);
+
+    changedTodos[indexOfChangedElement].checked = !changedTodos[indexOfChangedElement].checked;
+
+    saveTodos(changedTodos);
+  };
+
+  const handleRemove = (id) => {
+    // usunac element z tablicy
+    const filteredTodos = todos.filter((todo) => todo.id !== id);
+    saveTodos(filteredTodos);
+  };
+
   return (<div>
   <h1>Todo list</h1>
   <form onSubmit={handleSubmit}>
@@ -93,7 +122,7 @@ const App = () => {
     <button type="submit">send todo</button>
     {isErrorMessage ? <p className={styles.error}>Za malo znaków. Minimum 3</p> : null}
   </form>
-  <TodoList todoList={todos}/>
+  <TodoList todoList={todos} onRemove={handleRemove} onFinish={handleTaskFinished}/>
 </div>);
 };
 

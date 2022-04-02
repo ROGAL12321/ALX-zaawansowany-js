@@ -1,0 +1,14 @@
+{
+  "name": "zadanie3-json-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "database": "json-server ./data/cars.json -p 3003"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.17.0"
+  }
+}
