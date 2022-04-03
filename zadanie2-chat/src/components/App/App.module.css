@@ -1,0 +1,12 @@
+.wrapper {
+  width: 800px;
+  margin: 20px auto;
+}
+
+.chatBox {
+  border: 1px solid black;
+  width: 400px;
+  height: 400px;
+  overflow: scroll;
+  margin: 20px 0;
+}
