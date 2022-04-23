@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './style.module.css';
+
 function InputGroup({ id, type, label, handleChange, inputValue }) {
   return (
-    <div>
-      <label htmlFor={id}>
+    <div className={styles.inputContainer}>
+      <label htmlFor={id} className={styles.label}>
         {label}
-        <input type={type} id={id} onChange={handleChange} value={inputValue} />
+        <input
+          type={type}
+          id={id}
+          onChange={handleChange}
+          value={inputValue}
+          className={styles.input}
+        />
       </label>
     </div>
   );

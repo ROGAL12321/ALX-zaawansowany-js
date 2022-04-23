@@ -1,6 +1,8 @@
 .button {
+  margin-top: 12px;
   padding: 8px 12px;
-  background: #ddd;
+  font-weight: bold;
+  background: rgba(245, 52, 157, 0.5);
   border: none;
   border-radius: 8px;
   cursor: pointer;

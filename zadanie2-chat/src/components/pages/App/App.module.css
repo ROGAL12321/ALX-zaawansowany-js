@@ -1,12 +1,33 @@
-.wrapper {
-  width: 800px;
-  margin: 20px auto;
-}
-
 .chatBox {
   border: 1px solid black;
-  width: 400px;
   height: 400px;
   overflow: scroll;
   margin: 20px 0;
+}
+
+.chatBox ul {
+  list-style: none;
+  padding: 0 5px;
+}
+
+.chatBox li {
+  padding: 4px 0;
+  border-bottom: 1px solid #ddd;
+  margin: 12px 0;
+  padding-bottom: 12px;
+}
+
+.chatBox p {
+  margin: 0;
+}
+
+.person {
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form {
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
 }
