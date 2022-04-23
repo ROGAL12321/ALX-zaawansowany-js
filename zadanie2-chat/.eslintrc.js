@@ -25,5 +25,13 @@ module.exports = {
         extensions: ['.js', '.jsx'],
       },
     ],
+    'react/button-has-type': 0,
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
   },
 };

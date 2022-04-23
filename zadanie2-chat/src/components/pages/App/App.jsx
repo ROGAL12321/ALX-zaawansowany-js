@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { onValue, ref, set } from 'firebase/database';
 
-import database from '../../firebase';
-
+import Button from 'components/elements/button/Button';
+import InputGroup from 'components/elements/input-group/InputGroup';
+import { observe, save } from 'services/firebase';
 import styles from './App.module.css';
 
 function App() {
@@ -11,18 +11,14 @@ function App() {
   const [messageInputValue, setMessageInputValue] = useState('');
 
   useEffect(() => {
-    onValue(ref(database, '/'), (snapshot) => {
-      const data = snapshot.val();
-      setMessages(Object.values(data ?? {}));
-    });
+    // funkcja zaawansowana
+    observe('/', setMessages);
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newMessageId = Date.now();
 
-    set(ref(database, `/${newMessageId}`), {
-      id: newMessageId,
+    save('/', {
       person: personInputValue,
       message: messageInputValue,
     });
@@ -52,29 +48,25 @@ function App() {
         </ul>
       </div>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="person">
-            Person
-            <input
-              type="text"
-              id="person"
-              value={personInputValue}
-              onChange={handlePersonChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="message">
-            Message
-            <input
-              type="text"
-              id="message"
-              onChange={handleMessageChange}
-              value={messageInputValue}
-            />
-          </label>
-        </div>
-        <button type="submit">Send</button>
+        <InputGroup
+          id="person"
+          type="text"
+          label="Person"
+          handleChange={handlePersonChange}
+          inputValue={personInputValue}
+        />
+        <InputGroup
+          id="message"
+          type="text"
+          label="Message"
+          handleChange={handleMessageChange}
+          inputValue={messageInputValue}
+        />
+        {/* Napis send jest specjalnym propsem children */}
+        <Button btnType="submit">
+          <i>&#8508;</i>
+          Send
+        </Button>
       </form>
     </div>
   );
