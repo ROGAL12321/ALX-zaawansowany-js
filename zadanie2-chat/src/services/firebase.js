@@ -1,5 +1,11 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref, set } from 'firebase/database';
+import {
+  getDatabase,
+  onValue,
+  ref,
+  get as FBget,
+  set,
+} from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,7 +22,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 export const observe = (url, callback) =>
-  onValue(ref(database, url), (snapshot) => {
+  onValue(ref(database, `${url}/`), (snapshot) => {
     const data = snapshot.val();
     // przekazalismy setMessages jako callback, poniewaz chcemy uruchomic ta funkcje za kazdym razem jak zmieniaja sie dane
     callback(Object.values(data ?? {}));
@@ -25,8 +31,13 @@ export const observe = (url, callback) =>
 export const save = (url, data) => {
   const newRecordId = Date.now();
 
-  return set(ref(database, `${url}${newRecordId}`), {
+  return set(ref(database, `${url}/${newRecordId}`), {
     id: newRecordId,
     ...data,
   });
 };
+
+export const update = (url, data) => set(ref(database, url), data);
+
+export const get = (url) =>
+  FBget(ref(database, url)).then((data) => data.val());

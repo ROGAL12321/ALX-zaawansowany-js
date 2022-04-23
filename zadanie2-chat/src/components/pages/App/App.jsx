@@ -4,7 +4,7 @@ import Button from 'components/elements/button/Button';
 import InputGroup from 'components/elements/input-group/InputGroup';
 import Main from 'components/layouts/main/Main';
 
-import { observe, save } from 'services/firebase';
+import { observe, get, save } from 'services/firebase';
 import styles from './App.module.css';
 
 function App() {
@@ -13,24 +13,28 @@ function App() {
   const [messageInputValue, setMessageInputValue] = useState('');
 
   useEffect(() => {
-    // funkcja zaawansowana
-    observe('messages/', setMessages);
+    // funkcja zaawansowana. Nasluchiwanie na nowe wiadomosci
+    observe('messages', setMessages);
+
+    // Odczyt obecnego uzytkownika z bazy danych
+    get('currentUser').then((user) => {
+      if (user && user.name) {
+        setPersonInputValue(user.name);
+      }
+    });
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    save('messages/', {
+    // @TODO: Add validation
+
+    save('messages', {
       person: personInputValue,
       message: messageInputValue,
     });
 
-    setPersonInputValue('');
     setMessageInputValue('');
-  };
-
-  const handlePersonChange = (event) => {
-    setPersonInputValue(event.target.value);
   };
 
   const handleMessageChange = (event) => {
@@ -56,7 +60,6 @@ function App() {
             id="person"
             type="text"
             label="Person"
-            handleChange={handlePersonChange}
             inputValue={personInputValue}
           />
           <InputGroup

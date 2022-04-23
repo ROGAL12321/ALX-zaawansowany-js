@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { get, update } from 'services/firebase';
 
 import Main from 'components/layouts/main/Main';
 import InputGroup from 'components/elements/input-group/InputGroup';
@@ -7,6 +10,16 @@ import Button from 'components/elements/button/Button';
 function MyProfile() {
   const [name, setName] = useState('');
   const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Odczyt obecnego uzytkownika z bazy danych
+    get('currentUser').then((user) => {
+      if (user && user.name) {
+        setName(user.name);
+      }
+    });
+  }, []);
 
   const handleInputChange = (event) => {
     setName(event.target.value);
@@ -20,7 +33,11 @@ function MyProfile() {
       return;
     }
 
-    console.log(name);
+    update('currentUser', {
+      name,
+    }).then(() => {
+      navigate('/');
+    });
   };
 
   return (
