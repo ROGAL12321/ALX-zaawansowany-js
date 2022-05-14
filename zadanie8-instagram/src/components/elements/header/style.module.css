@@ -2,6 +2,9 @@
   height: 40px;
   padding: 5px 10px;
   background: #eee;
+}
+
+.headerContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
