@@ -1,12 +1,15 @@
 import React from 'react';
 
 import Main from 'components/layouts/main/Main';
+import { PublicRoute } from 'utils/AuthorizationRoutes';
 
 function Home() {
   return (
-    <Main>
-      <h1>Hello Home</h1>
-    </Main>
+    <PublicRoute>
+      <Main>
+        <h1>Hello Home</h1>
+      </Main>
+    </PublicRoute>
   );
 }
 

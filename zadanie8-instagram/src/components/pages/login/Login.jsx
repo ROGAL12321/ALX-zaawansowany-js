@@ -5,6 +5,7 @@ import InputGroup from 'components/elements/input-group/InputGroup';
 import Button from 'components/elements/button/Button';
 
 import { loginUser } from 'services/firebase';
+import { PublicRoute } from 'utils/AuthorizationRoutes';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -36,26 +37,28 @@ function Login() {
   };
 
   return (
-    <Main>
-      <form className="form" onSubmit={handleSubmit}>
-        <InputGroup
-          id="email"
-          type="text"
-          label="email"
-          handleChange={handleEmailChange}
-          inputValue={email}
-        />
-        <InputGroup
-          id="password"
-          type="password"
-          label="password"
-          handleChange={handlePasswordChange}
-          inputValue={password}
-        />
-        <Button btnType="submit">Sign in</Button>
-        {apiError && <p>{apiError}</p>}
-      </form>
-    </Main>
+    <PublicRoute>
+      <Main>
+        <form className="form" onSubmit={handleSubmit}>
+          <InputGroup
+            id="email"
+            type="text"
+            label="email"
+            handleChange={handleEmailChange}
+            inputValue={email}
+          />
+          <InputGroup
+            id="password"
+            type="password"
+            label="password"
+            handleChange={handlePasswordChange}
+            inputValue={password}
+          />
+          <Button btnType="submit">Sign in</Button>
+          {apiError && <p>{apiError}</p>}
+        </form>
+      </Main>
+    </PublicRoute>
   );
 }
 

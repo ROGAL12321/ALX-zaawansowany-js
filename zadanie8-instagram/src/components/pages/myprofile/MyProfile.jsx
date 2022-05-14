@@ -6,6 +6,7 @@ import Button from 'components/elements/button/Button';
 import { updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { MainContext } from 'contexts/main';
+import { RestrictedRoute } from 'utils/AuthorizationRoutes';
 
 function MyProfile() {
   const { currentUser } = useContext(MainContext);
@@ -38,25 +39,27 @@ function MyProfile() {
   };
 
   return (
-    <Main>
-      <form className="form" onSubmit={handleSubmit}>
-        <InputGroup
-          id="name"
-          type="text"
-          label="name"
-          handleChange={handleNameChange}
-          inputValue={name}
-        />
-        <InputGroup
-          id="avatar"
-          type="text"
-          label="avatar"
-          handleChange={handleAvatarChange}
-          inputValue={avatar}
-        />
-        <Button btnType="submit">Save</Button>
-      </form>
-    </Main>
+    <RestrictedRoute>
+      <Main>
+        <form className="form" onSubmit={handleSubmit}>
+          <InputGroup
+            id="name"
+            type="text"
+            label="name"
+            handleChange={handleNameChange}
+            inputValue={name}
+          />
+          <InputGroup
+            id="avatar"
+            type="text"
+            label="avatar"
+            handleChange={handleAvatarChange}
+            inputValue={avatar}
+          />
+          <Button btnType="submit">Save</Button>
+        </form>
+      </Main>
+    </RestrictedRoute>
   );
 }
 
