@@ -25,6 +25,13 @@ function Header() {
             {currentUser ? (
               <>
                 <li>
+                  <img
+                    className={styles.avatar}
+                    src={currentUser.photoURL}
+                    alt="avatar"
+                  />
+                </li>
+                <li>
                   <Link to="/me">
                     <Button>My profile</Button>
                   </Link>

@@ -14,10 +14,15 @@ export const MainContext = React.createContext({
 
 export function MainContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   onAuthStateChanged(auth, (user) => {
-    setCurrentUser(user);
+    if (!currentUser && user) setCurrentUser(user);
+    if (currentUser && !user) setCurrentUser(null);
+    setIsLoading(false);
   });
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <MainContext.Provider

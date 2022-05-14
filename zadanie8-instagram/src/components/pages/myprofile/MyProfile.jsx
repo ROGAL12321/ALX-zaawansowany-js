@@ -9,8 +9,9 @@ import { MainContext } from 'contexts/main';
 
 function MyProfile() {
   const { currentUser } = useContext(MainContext);
-  const [name, setName] = useState('');
-  const [avatar, setAvatar] = useState('');
+
+  const [name, setName] = useState(currentUser.displayName);
+  const [avatar, setAvatar] = useState(currentUser.photoURL);
   const navigate = useNavigate();
 
   const handleNameChange = (event) => {
