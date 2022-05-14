@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../button/Button';
 
 import styles from './style.module.css';
 
@@ -13,7 +14,9 @@ function Header() {
         <nav className={styles.navigation}>
           <ul>
             <li>
-              <Link to="/me">My Profile</Link>
+              <Link to="/register">
+                <Button>Sign up</Button>
+              </Link>
             </li>
           </ul>
         </nav>
