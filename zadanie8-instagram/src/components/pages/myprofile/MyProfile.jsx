@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Main from 'components/layouts/main/Main';
 import InputGroup from 'components/elements/input-group/InputGroup';
-import { auth } from 'services/firebase';
 import Button from 'components/elements/button/Button';
 
-import { onAuthStateChanged, updateProfile } from 'firebase/auth';
+import { updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { MainContext } from 'contexts/main';
 
 function MyProfile() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const { currentUser } = useContext(MainContext);
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
   const navigate = useNavigate();
-
-  onAuthStateChanged(auth, (user) => {
-    setCurrentUser(user);
-  });
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -28,7 +24,7 @@ function MyProfile() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    updateProfile(auth.currentUser, {
+    updateProfile(currentUser, {
       displayName: name,
       photoURL: avatar,
     })
@@ -39,8 +35,6 @@ function MyProfile() {
         console.log(error);
       });
   };
-
-  console.log(currentUser);
 
   return (
     <Main>

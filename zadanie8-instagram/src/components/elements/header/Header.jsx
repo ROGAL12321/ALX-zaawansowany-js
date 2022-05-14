@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, signOutUser } from 'services/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { signOutUser } from 'services/firebase';
+import { MainContext } from 'contexts/main';
 import Button from '../button/Button';
 
 import styles from './style.module.css';
 
 function Header() {
-  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
-
-  onAuthStateChanged(auth, (user) => {
-    setCurrentUser(user);
-  });
+  const { currentUser } = useContext(MainContext);
 
   const signOut = () => {
     signOutUser().then(() => navigate('/'));
   };
-
-  console.log(currentUser);
 
   return (
     <header className={styles.header}>
