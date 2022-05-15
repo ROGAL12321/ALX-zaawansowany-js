@@ -10,6 +10,7 @@ import Login from 'components/pages/login/Login';
 import Register from 'components/pages/register/Register';
 import RemindPassword from 'components/pages/remind-password/RemindPassword';
 import Home from './components/pages/home/Home';
+import AddPost from './components/pages/addpost/AddPost';
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function Router() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="create" element={<AddPost />} />
           <Route path="remind-password" element={<RemindPassword />} />
           <Route path="me" element={<MyProfile />} />
           <Route path="*" element={<NotFound />} />

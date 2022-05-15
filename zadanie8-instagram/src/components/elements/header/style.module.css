@@ -3,6 +3,10 @@
   background: #eee;
 }
 
+.headerInverted {
+  background: gray;
+}
+
 .headerContainer {
   display: flex;
   align-items: center;

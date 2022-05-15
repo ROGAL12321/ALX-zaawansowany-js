@@ -15,12 +15,17 @@ export const MainContext = React.createContext({
 export function MainContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   onAuthStateChanged(auth, (user) => {
     if (!currentUser && user) setCurrentUser(user);
     if (currentUser && !user) setCurrentUser(null);
     setIsLoading(false);
   });
+
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -29,6 +34,8 @@ export function MainContextProvider({ children }) {
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         currentUser,
+        isDarkTheme,
+        toggleTheme,
       }}
     >
       {children}

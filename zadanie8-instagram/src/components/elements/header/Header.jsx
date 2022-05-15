@@ -8,14 +8,20 @@ import styles from './style.module.css';
 
 function Header() {
   const navigate = useNavigate();
-  const { currentUser } = useContext(MainContext);
+  const { currentUser, toggleTheme, isDarkTheme } = useContext(MainContext);
 
   const signOut = () => {
     signOutUser().then(() => navigate('/'));
   };
 
+  const handleDarkTheme = () => {
+    toggleTheme();
+  };
+
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${isDarkTheme ? styles.headerInverted : ''}`}
+    >
       <div className={`container ${styles.headerContainer}`}>
         <Link to="/" className={styles.logo}>
           <h1 className={styles.title}>Instagram App</h1>
@@ -24,6 +30,17 @@ function Header() {
           <ul>
             {currentUser ? (
               <>
+                <li>
+                  <Link to="/create">
+                    <Button>Add post</Button>
+                  </Link>
+                </li>
+                <li>
+                  <Button btnType="button" onClick={handleDarkTheme}>
+                    {' '}
+                    Dark theme{' '}
+                  </Button>
+                </li>
                 <li>
                   <img
                     className={styles.avatar}
