@@ -39,3 +39,18 @@
   font-weight: bold;
   margin-bottom: 5px;
 }
+
+.likesContainer {
+  margin-bottom: 10px;
+}
+
+.likesContainer button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 30px 0 20px;
+}
+
+.likesContainer img {
+  width: 40px;
+}
