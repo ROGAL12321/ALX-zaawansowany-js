@@ -1,5 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import ENDPOINTS from 'consts/endpoints';
+
 import Main from 'components/layouts/main/Main';
 import InputGroup from 'components/elements/input-group/InputGroup';
 import Button from 'components/elements/button/Button';
@@ -34,7 +37,7 @@ function AddPost() {
           },
         };
 
-        return save('posts', newPost);
+        return save(ENDPOINTS.posts, newPost);
       })
       .then(() => {
         navigate('/dashboard');

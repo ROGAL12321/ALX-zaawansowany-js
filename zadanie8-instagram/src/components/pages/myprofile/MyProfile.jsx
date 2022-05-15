@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import URLS from 'consts/urls';
+
 import Main from 'components/layouts/main/Main';
 import InputGroup from 'components/elements/input-group/InputGroup';
 import Button from 'components/elements/button/Button';
 
 import { updateProfile } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+
 import { MainContext } from 'contexts/main';
 import { RestrictedRoute } from 'utils/AuthorizationRoutes';
 
@@ -31,7 +35,7 @@ function MyProfile() {
       photoURL: avatar,
     })
       .then(() => {
-        navigate('/dashboard');
+        navigate(`/${URLS.dashboard}`);
       })
       .catch((error) => {
         console.log(error);
