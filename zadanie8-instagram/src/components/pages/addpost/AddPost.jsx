@@ -28,7 +28,6 @@ function AddPost() {
           title,
           description,
           image: url,
-          likes: 0,
           author: {
             name: currentUser.displayName,
             avatar: currentUser.photoURL,

@@ -54,3 +54,7 @@
 .likesContainer img {
   width: 40px;
 }
+
+.liked {
+  background: lightblue;
+}
