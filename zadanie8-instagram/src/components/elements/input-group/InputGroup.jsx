@@ -25,7 +25,7 @@ InputGroup.defaultProps = {
   type: 'text',
   label: '',
   handleChange: () => null,
-  inputValue: '',
+  inputValue: undefined,
 };
 
 InputGroup.propTypes = {
