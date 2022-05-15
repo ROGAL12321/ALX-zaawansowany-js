@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
+
 import Main from 'components/layouts/main/Main';
 import { RestrictedRoute } from 'utils/AuthorizationRoutes';
-import { update, get } from 'services/firebase';
+import { update, get, save } from 'services/firebase';
 
 import { MainContext } from 'contexts/main';
 import styles from './style.module.css';
@@ -37,6 +38,11 @@ function Dashboard() {
       const selectedPostIndex = posts.findIndex(
         (frontPost) => frontPost.id === post.id
       );
+
+      save('notifications', {
+        value: 'Ktos polajkowal Twoj post',
+        reciepent: post.author.name,
+      });
 
       copiedPostArray[selectedPostIndex].likes = newLikes;
       setPosts(copiedPostArray);
