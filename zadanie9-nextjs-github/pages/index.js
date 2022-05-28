@@ -25,14 +25,15 @@ export default function Home() {
       <Head>
         <title>index page</title>
       </Head>
-      <div className="m-4">
+      <div className="border-2 border-gray-500 p-2">
         <input
           type="text"
           placeholder="Search"
+          className="w-full border-2 border-gray-500 rounded p-2"
           value={inputValue}
           onChange={handleInputChange}
         />
-        <button type="button" onClick={handleButtonClick}> Send </button>
+        <button type="button" className="rounded bg-red-800 w-full my-3 text-white" onClick={handleButtonClick}> Send </button>
       </div>
     </Main>
   )

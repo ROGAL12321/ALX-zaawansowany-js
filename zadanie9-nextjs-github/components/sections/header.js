@@ -1,11 +1,11 @@
-import Link from "next/link"
+// import Link from "next/link"
 
 export default function Header() {
   return (
-    <header>
-      Hello from header
-      <nav>
-        <ul>
+    <header className="bg-gray-600 p-3 text-white text-center">
+      Github App
+      {/* <nav>
+        <ul className="flex">
           <li>
             <Link href="/">Index</Link>
           </li>
@@ -13,7 +13,7 @@ export default function Header() {
             <Link href="/results">Results</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
     </header>
   )
 }
