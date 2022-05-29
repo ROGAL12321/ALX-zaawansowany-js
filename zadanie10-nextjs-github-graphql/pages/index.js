@@ -44,7 +44,7 @@ export default function Home({ title }) {
 
 export async function getStaticProps() {
   // zalozmy ze to pochodzi z BE
-  const title = translations.title
+  const title = texts.title
 
   return {
     props: {
