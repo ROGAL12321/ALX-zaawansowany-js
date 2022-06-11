@@ -1,20 +1,32 @@
+import { useContext } from 'react'
+import { GlobalContext } from 'contexts/global'
 import formatDate from 'date-fns/format'
 import Link from 'next/link'
 
-const EntryItem = ({ entry }) => (
-  <div className="flex flex-col space-y-2 p-2">
-    <button className='border-2'>Select</button>
-    <div className="prose dark:prose-dark w-full">{entry.message}</div>
-    <div className="flex items-center space-x-3">
-      <p className="text-sm text-gray-500">{entry.name}</p>
-      <span className="text-gray-200 dark:text-gray-800">/</span>
-      <p className="text-sm text-gray-400 dark:text-gray-600">
-        {formatDate(new Date(entry.createdAt), "d MMM yyyy 'at' h:mm bb")}
-      </p>
-      <Link href={`/entries/${entry._id}`}>Przejdz do wiadomości</Link>
+const EntryItem = ({ entry }) => {
+  const { state, handleEntryChange } = useContext(GlobalContext)
+  const isSelected = state.selected.find(element => element === entry._id)
+
+  return (
+    <div className={`flex flex-col space-y-2 p-2 ${isSelected ? 'border-2 border-gray-600' : ''}`}>
+      <button
+        className='border-2'
+        onClick={() => handleEntryChange(entry._id)}
+      >
+        {isSelected ? 'Unselect' : 'Select'}
+      </button>
+      <div className="prose dark:prose-dark w-full">{entry.message}</div>
+      <div className="flex items-center space-x-3">
+        <p className="text-sm text-gray-500">{entry.name}</p>
+        <span className="text-gray-200 dark:text-gray-800">/</span>
+        <p className="text-sm text-gray-400 dark:text-gray-600">
+          {formatDate(new Date(entry.createdAt), "d MMM yyyy 'at' h:mm bb")}
+        </p>
+        <Link href={`/entries/${entry._id}`}>Przejdz do wiadomości</Link>
+      </div>
     </div>
-  </div>
-)
+  )
+  }
 
 export default EntryItem
 
