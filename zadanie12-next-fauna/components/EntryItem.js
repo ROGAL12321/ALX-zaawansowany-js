@@ -2,7 +2,8 @@ import formatDate from 'date-fns/format'
 import Link from 'next/link'
 
 const EntryItem = ({ entry }) => (
-  <div className="flex flex-col space-y-2">
+  <div className="flex flex-col space-y-2 p-2">
+    <button className='border-2'>Select</button>
     <div className="prose dark:prose-dark w-full">{entry.message}</div>
     <div className="flex items-center space-x-3">
       <p className="text-sm text-gray-500">{entry.name}</p>
@@ -16,3 +17,9 @@ const EntryItem = ({ entry }) => (
 )
 
 export default EntryItem
+
+// 1. Zrob obsluge zaznaczenia elementu za pomoca globalnego stanu
+// 2. Po wcisnieciu przycisku, zmien tresc przycisku na 'unselect', dodaj do elementu klase "border-2 border-gray-600" (zeby zaznaczony element byl w ramce)
+// 3. Zaznaczenie powinno dzialac w momencie jak przechodze na szczegoly danego postu i wracam do ekranu glownego
+// 4. Tylko odswiezenie przegladarki, powinno anulowac wszystkie zaznaczenia (wersja dla PRO - zapamietaj wybor uzytkownika)
+// 5. Skorzystaj z globalnego stanu.
